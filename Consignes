@@ -1,0 +1,51 @@
+# Labo Dev
+Dév une Web API en ASP.Net avec une base de données MSSQL.
+Ensuite la déployer l'application Web et la base de données.
+
+## Technologie
+ ASP.Net 8
+ MSSQL 2019
+
+## Objectif
+Réaliser une API de gestion de stock de magasin
+Fonctionnalité : 
+- Ajouter des produits en stock dans la réserve
+  - Date
+  - Quantité
+- Deplacer des produits de la réserve vers les rayons
+  - Date
+  - Quantité
+- Pouvoir retirer des produits du stock (réserve/rayon)
+  - Date de retrait
+  - Stock cible
+  - Quantité
+  - Raison
+- L'utilisateur peut consulter
+  - Les stocks en réserve.
+  - Le detail d'un stock dans la réserve.
+  - Les produits en rayons _(filtre possible, exemple : Les produit du rayon biere)_.
+  - Les différents transaction (Mouvement de stock).
+
+Il sera necessaire de se connecter avec un compte utilisateur : 
+- User
+  - Retrait de produits
+  - Consulter les produits en rayons
+- Responsable
+  - Ajout et Retrait de produits
+  - Consulter les produits en rayons et en réserve
+- Admin
+  - Tout...
+
+## Details des produits a stocker
+Les produits doivent posseder : 
+ - Nom
+ - Marque (optionnel)
+ - Categories
+ - Desc (optionnel)
+ - Date limite (quand necessaire)
+ - Prix HTVA
+ - TVA
+
+- Les categories
+ - Nom
+ - Desc (optionnel)

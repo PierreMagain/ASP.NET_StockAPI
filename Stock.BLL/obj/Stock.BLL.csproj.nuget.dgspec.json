@@ -1,0 +1,199 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/pierrem/Documents/Stock/Stock.BLL/Stock.BLL.csproj": {}
+  },
+  "projects": {
+    "/home/pierrem/Documents/Stock/Stock.BLL/Stock.BLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pierrem/Documents/Stock/Stock.BLL/Stock.BLL.csproj",
+        "projectName": "Stock.BLL",
+        "projectPath": "/home/pierrem/Documents/Stock/Stock.BLL/Stock.BLL.csproj",
+        "packagesPath": "/home/pierrem/.nuget/packages/",
+        "outputPath": "/home/pierrem/Documents/Stock/Stock.BLL/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pierrem/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/pierrem/Documents/Stock/Stock.DAL/Stock.DAL.csproj": {
+                "projectPath": "/home/pierrem/Documents/Stock/Stock.DAL/Stock.DAL.csproj"
+              },
+              "/home/pierrem/Documents/Stock/Stock.Domain/Stock.Domain.csproj": {
+                "projectPath": "/home/pierrem/Documents/Stock/Stock.Domain/Stock.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/pierrem/Téléchargements/.dotnet/sdk/8.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/pierrem/Documents/Stock/Stock.DAL/Stock.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pierrem/Documents/Stock/Stock.DAL/Stock.DAL.csproj",
+        "projectName": "Stock.DAL",
+        "projectPath": "/home/pierrem/Documents/Stock/Stock.DAL/Stock.DAL.csproj",
+        "packagesPath": "/home/pierrem/.nuget/packages/",
+        "outputPath": "/home/pierrem/Documents/Stock/Stock.DAL/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pierrem/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/pierrem/Documents/Stock/Stock.Domain/Stock.Domain.csproj": {
+                "projectPath": "/home/pierrem/Documents/Stock/Stock.Domain/Stock.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/pierrem/Téléchargements/.dotnet/sdk/8.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/pierrem/Documents/Stock/Stock.Domain/Stock.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pierrem/Documents/Stock/Stock.Domain/Stock.Domain.csproj",
+        "projectName": "Stock.Domain",
+        "projectPath": "/home/pierrem/Documents/Stock/Stock.Domain/Stock.Domain.csproj",
+        "packagesPath": "/home/pierrem/.nuget/packages/",
+        "outputPath": "/home/pierrem/Documents/Stock/Stock.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pierrem/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/pierrem/Téléchargements/.dotnet/sdk/8.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

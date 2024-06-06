@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/pierrem/Documents/Stock/Stock.DB/Stock.DB.sqlproj": {}
+  },
+  "projects": {
+    "/home/pierrem/Documents/Stock/Stock.DB/Stock.DB.sqlproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pierrem/Documents/Stock/Stock.DB/Stock.DB.sqlproj",
+        "projectName": "Stock.DB",
+        "projectPath": "/home/pierrem/Documents/Stock/Stock.DB/Stock.DB.sqlproj",
+        "packagesPath": "/home/pierrem/.nuget/packages/",
+        "outputPath": "/home/pierrem/Documents/Stock/Stock.DB/obj/",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "/home/pierrem/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net46"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net46": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5128"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net46": {
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            }
+          }
+        }
+      }
+    }
+  }
+}
