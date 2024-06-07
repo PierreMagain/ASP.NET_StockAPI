@@ -7,12 +7,12 @@ using Stock.Domain.Entities;
 
 namespace Stock.DAL.Interfaces
 {
-    public interface IProductRepository : IBaseRepository<Product,string> 
+    public interface IProductRepository : IBaseRepository<Product,int> 
     {
-        Product? GetFullById(string Id);
+        Product? GetFullById(int Id);
 
         bool ExistByUnicityCriteria(Product product);
-        bool ExistById(string Id);
-        //bool ExistByUnicityCriteriaAndNotSameISBN(string isbn,Book book);
+        bool ExistById(int Id);
+        bool ExistByUnicityCriteriaAndNotSameISBN(int Id,Product product);
     }
 }
