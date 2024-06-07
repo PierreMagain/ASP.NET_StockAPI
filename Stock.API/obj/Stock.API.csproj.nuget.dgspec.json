@@ -1,9 +1,87 @@
 {
   "format": 1,
   "restore": {
-    "/home/pierrem/Documents/Stock/Stock.BLL/Stock.BLL.csproj": {}
+    "/home/pierrem/Documents/Stock/Stock.API/Stock.API.csproj": {}
   },
   "projects": {
+    "/home/pierrem/Documents/Stock/Stock.API/Stock.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pierrem/Documents/Stock/Stock.API/Stock.API.csproj",
+        "projectName": "Stock.API",
+        "projectPath": "/home/pierrem/Documents/Stock/Stock.API/Stock.API.csproj",
+        "packagesPath": "/home/pierrem/.nuget/packages/",
+        "outputPath": "/home/pierrem/Documents/Stock/Stock.API/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pierrem/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/pierrem/Documents/Stock/Stock.BLL/Stock.BLL.csproj": {
+                "projectPath": "/home/pierrem/Documents/Stock/Stock.BLL/Stock.BLL.csproj"
+              },
+              "/home/pierrem/Documents/Stock/Stock.Domain/Stock.Domain.csproj": {
+                "projectPath": "/home/pierrem/Documents/Stock/Stock.Domain/Stock.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/pierrem/Téléchargements/.dotnet/sdk/8.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/home/pierrem/Documents/Stock/Stock.BLL/Stock.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
