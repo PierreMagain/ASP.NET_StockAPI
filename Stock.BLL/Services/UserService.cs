@@ -4,7 +4,7 @@ using Stock.DAL.Interfaces;
 using Stock.Domain.Entities;
 using BCrypt.Net;
 
-namespace TI_Devops_2024_DemoAspMvc.BLL.Services
+namespace Stock.BLL.Services
 {
     public class UserService : IUserService
     {

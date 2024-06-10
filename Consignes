@@ -4,7 +4,7 @@ Ensuite la déployer l'application Web et la base de données.
 
 ## Technologie
  ASP.Net 8
- MSSQL 2019
+ MSSQL 2022
 
 ## Objectif
 Réaliser une API de gestion de stock de magasin
