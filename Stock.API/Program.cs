@@ -8,7 +8,6 @@ using Stock.BLL.Services;
 using Stock.DAL.Interfaces;
 using Stock.DAL.Repositories;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -39,13 +38,13 @@ builder.Services.AddSwaggerGen(c => {
     });
 });
 
-builder.Services.AddScoped<IProductRepository,ProductRepository>();
-builder.Services.AddScoped<IProductService,ProductService>();
-builder.Services.AddScoped<IUserService,UserService>();
-builder.Services.AddScoped<IUserRepository,UserRepository>();
-builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddScoped<SqlConnection>(sp =>{
+builder.Services.AddScoped<SqlConnection>(sp => {
     return new SqlConnection(builder.Configuration.GetConnectionString("default"));
 });
 
@@ -77,4 +76,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Add this line to redirect to /swagger
+app.MapGet("/", () => Results.Redirect("/swagger"));
+
 app.Run();
