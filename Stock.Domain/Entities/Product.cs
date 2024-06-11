@@ -17,5 +17,6 @@ namespace Stock.Domain.Entities
         public decimal VAT { get; set; }
         public int QuantityInStock { get; set; }
         public int QuantityInShelf { get; set; }
+        public List<Categories>? Categories { get; set; }
     }
 }

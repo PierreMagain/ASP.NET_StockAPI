@@ -50,7 +50,7 @@ namespace Stock.BLL.Services
             {
                 throw new KeyNotFoundException($"Product with {id} doesn't exist");
             }
-            if (_productRepository.ExistByUnicityCriteriaAndNotSameISBN(id,p))
+            if (_productRepository.ExistByUnicityCriteriaAndNotSameId(id,p))
             {
                 throw new Exception("Error");
             }

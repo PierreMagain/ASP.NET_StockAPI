@@ -12,9 +12,10 @@ namespace Stock.Domain.Entities
         public DateTime TransactionDate { get; set; }
         public string TransactionType { get; set; } = null!;
         public int ProductId { get; set; }
+        public Product? Product{get; set;}
         public int Quantity { get; set; }
-        public string Source { get; set; } = null!;
-        public string Destination { get; set; } = null!;
-        public string Reason { get; set; } = null!;
+        public string? Source { get; set; }
+        public string? Destination { get; set; }
+        public string? Reason { get; set; }
     }
 }

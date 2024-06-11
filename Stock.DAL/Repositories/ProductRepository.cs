@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using Stock.DAL.Interfaces;
@@ -13,7 +14,7 @@ namespace Stock.DAL.Repositories
 
         protected override Product Convert(IDataRecord r)
         {
-            return new Product()
+            Product product= new Product()
             {
                 Id = (int)r["Id"],
                 Name = (string)r["Name"],
@@ -23,8 +24,13 @@ namespace Stock.DAL.Repositories
                 PriceExcludingTax = (decimal)r["PriceExcludingTax"],
                 VAT = (decimal)r["VAT"],
                 QuantityInStock = (int)r["QuantityInStock"],
-                QuantityInShelf = (int)r["QuantityInShelf"]             
+                QuantityInShelf = (int)r["QuantityInShelf"],        
             };
+            // foreach (Categories category in r["Categories"]){
+            //          product.Categories = category;
+            // }
+           
+            return product;
         }
         public override int Create(Product p)
         {
@@ -32,7 +38,7 @@ namespace Stock.DAL.Repositories
 
             cmd.CommandText = $@"INSERT INTO Product
                                  OUTPUT INSERTED.Id
-                                 VALUES(@id,@name,@brand,@description,@expiryDate,@priceExcludingTax,@vat,@quantityInStock,@quantityInShelf)";
+                                 VALUES(@id,@name,@brand,@description,@expiryDate,@priceExcludingTax,@vat,@quantityInStock,@quantityInShelf,@categoriesId)";
             
             cmd.Parameters.AddWithValue("@id",p.Id);
             cmd.Parameters.AddWithValue("@name",p.Name);
@@ -43,6 +49,7 @@ namespace Stock.DAL.Repositories
             cmd.Parameters.AddWithValue("@vat",p.VAT);
             cmd.Parameters.AddWithValue("@quantityInStock",p.QuantityInStock);
             cmd.Parameters.AddWithValue("@quantityInShelf",p.QuantityInShelf);
+            cmd.Parameters.AddWithValue("@categoriesId",p.CategoriesId);
 
             _conn.Open();
 
@@ -92,9 +99,12 @@ namespace Stock.DAL.Repositories
         {
             using SqlCommand cmd = _conn.CreateCommand();
 
-            cmd.CommandText = $@"SELECT * 
-                                 FROM Product P
-                                 WHERE p.Id = @id";
+            cmd.CommandText = $@"SELECT c.Name as 'Category'
+                                FROM ProductCategories PC
+                                JOIN 
+                                    Categories c ON PC.CategoryId = c.Id
+                                    JOIN Product p on PC.ProductId=p.Id
+                                    WHERE p.Id=1";
             
             cmd.Parameters.AddWithValue("@id",Id);
 
@@ -125,8 +135,8 @@ namespace Stock.DAL.Repositories
                                        ExpiryDate = @expiryDate";
             
             cmd.Parameters.AddWithValue("@name",product.Name);
-            cmd.Parameters.AddWithValue("@brand",product.Brand);
-            cmd.Parameters.AddWithValue("@expiryDate",product.ExpiryDate);
+            cmd.Parameters.AddWithValue("@brand",product.Brand == null ? DBNull.Value : product.Brand);
+            cmd.Parameters.AddWithValue("@expiryDate",product.ExpiryDate == null ? DBNull.Value : product.ExpiryDate);
 
             _conn.Open();
 
@@ -156,7 +166,7 @@ namespace Stock.DAL.Repositories
             return count > 0;
         }
 
-        public bool ExistByUnicityCriteriaAndNotSameISBN(int Id, Product product)
+        public bool ExistByUnicityCriteriaAndNotSameId(int Id, Product product)
         {
            using SqlCommand cmd = _conn.CreateCommand();
 
@@ -168,8 +178,8 @@ namespace Stock.DAL.Repositories
                                        Id not like @id";
             
             cmd.Parameters.AddWithValue("@name",product.Name);
-            cmd.Parameters.AddWithValue("@brand",product.Brand);
-            cmd.Parameters.AddWithValue("@expiryDate",product.ExpiryDate);
+            cmd.Parameters.AddWithValue("@brand",product.Brand == null ? DBNull.Value : product.Brand);
+            cmd.Parameters.AddWithValue("@expiryDate",product.ExpiryDate == null ? DBNull.Value : product.ExpiryDate);
             cmd.Parameters.AddWithValue("@id",Id);
 
             _conn.Open();

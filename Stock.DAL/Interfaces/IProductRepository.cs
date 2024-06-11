@@ -13,6 +13,6 @@ namespace Stock.DAL.Interfaces
 
         bool ExistByUnicityCriteria(Product product);
         bool ExistById(int Id);
-        bool ExistByUnicityCriteriaAndNotSameISBN(int Id,Product product);
+        bool ExistByUnicityCriteriaAndNotSameId(int Id,Product product);
     }
 }

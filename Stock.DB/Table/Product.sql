@@ -7,8 +7,8 @@ CREATE TABLE [dbo].[Product]
   [ExpiryDate] DATE NULL,
   [PriceExcludingTax] DECIMAL(18, 2) NOT NULL,
   [VAT] DECIMAL(18, 2) NOT NULL,
-  [QuantityInStock] INT NULL,
-  [QuantityInShelf] INT NULL,
+  [QuantityInStock] INT NOT NULL,
+  [QuantityInShelf] INT NOT NULL,
   CONSTRAINT CK_Product__Name CHECK (LEN(TRIM(Name)) >= 1),
   CONSTRAINT CK_Product__Price CHECK (PriceExcludingTax >= 0),
   CONSTRAINT CK_Product__VAT CHECK (VAT >= 0)
