@@ -1,9 +1,0 @@
-/home/pierrem/Documents/Stock/Stock.DB/bin/Debug/Stock.DB.dacpac
-/home/pierrem/Documents/Stock/Stock.DB/obj/Debug/Model.xml
-/home/pierrem/Documents/Stock/Stock.DB/obj/Debug/refactor.xml
-/home/pierrem/Documents/Stock/Stock.DB/obj/Debug/postdeploy.sql
-/home/pierrem/Documents/Stock/Stock.DB/obj/Debug/predeploy.sql
-/home/pierrem/Documents/Stock/Stock.DB/obj/Debug/Stock.DB.dll
-/home/pierrem/Documents/Stock/Stock.DB/obj/Debug/Stock.DB.pdb
-/home/pierrem/Documents/Stock/Stock.DB/bin/Debug/Stock.DB.dll
-/home/pierrem/Documents/Stock/Stock.DB/bin/Debug/Stock.DB.pdb
