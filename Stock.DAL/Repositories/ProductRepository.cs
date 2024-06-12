@@ -24,87 +24,136 @@ namespace Stock.DAL.Repositories
                 PriceExcludingTax = (decimal)r["PriceExcludingTax"],
                 VAT = (decimal)r["VAT"],
                 QuantityInStock = (int)r["QuantityInStock"],
-                QuantityInShelf = (int)r["QuantityInShelf"],        
+                QuantityInShelf = (int)r["QuantityInShelf"],
+                Categories = r["Categories"] == DBNull.Value ? null : ((string)r["Categories"]).Split(',').Select(c => new Categories { Name = c.Trim() }).ToList()        
             };
-            // foreach (Categories category in r["Categories"]){
-            //          product.Categories = category;
-            // }
            
             return product;
         }
         public override int Create(Product p)
         {
             using SqlCommand cmd = _conn.CreateCommand();
+            SqlTransaction transaction = null;
 
-            cmd.CommandText = $@"INSERT INTO Product
-                                 OUTPUT INSERTED.Id
-                                 VALUES(@id,@name,@brand,@description,@expiryDate,@priceExcludingTax,@vat,@quantityInStock,@quantityInShelf,@categoriesId)";
+             _conn.Open();
+            transaction = _conn.BeginTransaction();
+            cmd.Transaction = transaction;
+
+            cmd.CommandText = @"INSERT INTO Product (Name, Brand, Description, ExpiryDate, PriceExcludingTax, VAT, QuantityInStock, QuantityInShelf)
+                                OUTPUT INSERTED.Id
+                                VALUES (@name, @brand, @description, @expiryDate, @priceExcludingTax, @vat, @quantityInStock, @quantityInShelf)";
             
-            cmd.Parameters.AddWithValue("@id",p.Id);
-            cmd.Parameters.AddWithValue("@name",p.Name);
-            cmd.Parameters.AddWithValue("@brand",p.Brand == null ? DBNull.Value : p.Brand);
-            cmd.Parameters.AddWithValue("@description",p.Description == null ? DBNull.Value : p.Description);
-            cmd.Parameters.AddWithValue("@expiryDate",p.ExpiryDate == null ? DBNull.Value : p.ExpiryDate);
-            cmd.Parameters.AddWithValue("@priceExcludingTax",p.PriceExcludingTax);
-            cmd.Parameters.AddWithValue("@vat",p.VAT);
-            cmd.Parameters.AddWithValue("@quantityInStock",p.QuantityInStock);
-            cmd.Parameters.AddWithValue("@quantityInShelf",p.QuantityInShelf);
-            cmd.Parameters.AddWithValue("@categoriesId",p.CategoriesId);
+            cmd.Parameters.AddWithValue("@name", p.Name);
+            cmd.Parameters.AddWithValue("@brand", p.Brand == null ? DBNull.Value : p.Brand);
+            cmd.Parameters.AddWithValue("@description", p.Description == null ? DBNull.Value : p.Description);
+            cmd.Parameters.AddWithValue("@expiryDate", p.ExpiryDate == null ? DBNull.Value : p.ExpiryDate);
+            cmd.Parameters.AddWithValue("@priceExcludingTax", p.PriceExcludingTax);
+            cmd.Parameters.AddWithValue("@vat", p.VAT);
+            cmd.Parameters.AddWithValue("@quantityInStock", p.QuantityInStock);
+            cmd.Parameters.AddWithValue("@quantityInShelf", p.QuantityInShelf);
 
-            _conn.Open();
+            int productId = (int)cmd.ExecuteScalar();
 
-            int id = (int)cmd.ExecuteScalar();
+            if (p.Categories != null && p.Categories.Count > 0)
+            {
+                foreach (var category in p.Categories)
+                {
+                    using SqlCommand catCmd = _conn.CreateCommand();
+                    catCmd.Transaction = transaction;
 
-            _conn.Close();
+                    catCmd.CommandText = @"INSERT INTO ProductCategories (ProductId, CategoryId)
+                                        VALUES (@productId, (SELECT Id FROM Categories WHERE Name = @categoryName))";
+                    catCmd.Parameters.AddWithValue("@productId", productId);
+                    catCmd.Parameters.AddWithValue("@categoryName", category.Name);
 
-            return id;
+                    catCmd.ExecuteNonQuery();
+                }
+            }
+
+            transaction.Commit();
+
+            return productId;
         }
 
         public override bool Update(int Id, Product p)
         {
             using SqlCommand cmd = _conn.CreateCommand();
-
-            cmd.CommandText = $@"UPDATE Product
-                                 SET Id = @newId,
-                                     Name = @name,
-                                     Brand = brand,
-                                     Description = @description,
-                                     ExpiryDate = @expiryDate,
-                                     PriceExcludingTax = @priceExcludingTax,
-                                     VAT = @vat,
-                                     QuantityInStock = @quantityInStock,
-                                     QuantityInShelf = @quantityInShelf
-                                 WHERE Id like @id";
-            
-            cmd.Parameters.AddWithValue("@id",p.Id);
-            cmd.Parameters.AddWithValue("@name",p.Name);
-            cmd.Parameters.AddWithValue("@brand",p.Brand == null ? DBNull.Value : p.Brand);
-            cmd.Parameters.AddWithValue("@description",p.Description == null ? DBNull.Value : p.Description);
-            cmd.Parameters.AddWithValue("@expiryDate",p.ExpiryDate == null ? DBNull.Value : p.ExpiryDate);
-            cmd.Parameters.AddWithValue("@priceExcludingTax",p.PriceExcludingTax);
-            cmd.Parameters.AddWithValue("@vat",p.VAT);
-            cmd.Parameters.AddWithValue("@quantityInStock",p.QuantityInStock);
-            cmd.Parameters.AddWithValue("@quantityInShelf",p.QuantityInShelf);
-
+            SqlTransaction transaction = null;
             _conn.Open();
+            transaction = _conn.BeginTransaction();
+            cmd.Transaction = transaction;
 
-            int nbRows = cmd.ExecuteNonQuery();
+            cmd.CommandText = @"UPDATE Product
+                                SET Name = @name,
+                                    Brand = @brand,
+                                    Description = @description,
+                                    ExpiryDate = @expiryDate,
+                                    PriceExcludingTax = @priceExcludingTax,
+                                    VAT = @vat,
+                                    QuantityInStock = @quantityInStock,
+                                    QuantityInShelf = @quantityInShelf
+                                WHERE Id = @id";
 
-            _conn.Close();
+            cmd.Parameters.AddWithValue("@id", p.Id);
+            cmd.Parameters.AddWithValue("@name", p.Name);
+            cmd.Parameters.AddWithValue("@brand", p.Brand == null ? DBNull.Value : p.Brand);
+            cmd.Parameters.AddWithValue("@description", p.Description == null ? DBNull.Value : p.Description);
+            cmd.Parameters.AddWithValue("@expiryDate", p.ExpiryDate == null ? DBNull.Value : p.ExpiryDate);
+            cmd.Parameters.AddWithValue("@priceExcludingTax", p.PriceExcludingTax);
+            cmd.Parameters.AddWithValue("@vat", p.VAT);
+            cmd.Parameters.AddWithValue("@quantityInStock", p.QuantityInStock);
+            cmd.Parameters.AddWithValue("@quantityInShelf", p.QuantityInShelf);
 
-            return nbRows == 1;
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+            if (rowsAffected != 1)
+            {
+                throw new Exception("Update failed");
+            }
+
+            cmd.CommandText = @"DELETE FROM ProductCategories WHERE ProductId = @productId";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@productId", p.Id);
+            cmd.ExecuteNonQuery();
+
+            if (p.Categories != null && p.Categories.Count > 0)
+            {
+                foreach (var category in p.Categories)
+                {
+                    using SqlCommand catCmd = _conn.CreateCommand();
+                    catCmd.Transaction = transaction;
+
+                    catCmd.CommandText = @"INSERT INTO ProductCategories (ProductId, CategoryId)
+                                        VALUES (@productId, (SELECT Id FROM Categories WHERE Name = @categoryName))";
+                    catCmd.Parameters.AddWithValue("@productId", p.Id);
+                    catCmd.Parameters.AddWithValue("@categoryName", category.Name);
+
+                    catCmd.ExecuteNonQuery();
+                }
+            }
+
+            transaction.Commit();
+            return true;
         }
 
         public Product? GetFullById(int Id)
         {
             using SqlCommand cmd = _conn.CreateCommand();
 
-            cmd.CommandText = $@"SELECT c.Name as 'Category'
-                                FROM ProductCategories PC
-                                JOIN 
-                                    Categories c ON PC.CategoryId = c.Id
-                                    JOIN Product p on PC.ProductId=p.Id
-                                    WHERE p.Id=1";
+            cmd.CommandText = $@"SELECT *,
+                                (SELECT 
+                                        STRING_AGG(c.Name, ', ') AS Categories
+                                    FROM 
+                                        Categories c
+                                    JOIN 
+                                        ProductCategories pc ON c.Id = pc.CategoryId
+                                    WHERE 
+                                        pc.ProductId = p.Id
+                                ) AS Categories
+                                FROM 
+                                    Product p
+                                WHERE 
+                                    p.Id = @id;";
             
             cmd.Parameters.AddWithValue("@id",Id);
 
@@ -147,15 +196,15 @@ namespace Stock.DAL.Repositories
             return count > 0;
         }
 
-        public bool ExistById(int Id)
+        public bool ExistByName(string Name)
         {
           using SqlCommand cmd = _conn.CreateCommand();
 
             cmd.CommandText = $@"SELECT COUNT(*)
                                  FROM Product
-                                 WHERE Id like @id";
+                                 WHERE Name = @name";
             
-            cmd.Parameters.AddWithValue("@id",Id);
+            cmd.Parameters.AddWithValue("@nae",Name);
 
             _conn.Open();
 
