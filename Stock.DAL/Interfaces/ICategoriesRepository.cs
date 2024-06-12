@@ -9,10 +9,7 @@ namespace Stock.DAL.Interfaces
 {
     public interface ICategoriesRepository : IBaseRepository<Categories,int> 
     {
-        // Product? GetFullById(int Id);
-
-        // bool ExistByUnicityCriteria(Product product);
-        // bool ExistById(int Id);
-        // bool ExistByUnicityCriteriaAndNotSameId(int Id,Product product);
+        Categories? GetFullById(int Id);
+        bool ExistByName(string Name);
     }
 }

@@ -12,7 +12,7 @@ namespace Stock.DAL.Interfaces
         Product? GetFullById(int Id);
 
         bool ExistByUnicityCriteria(Product product);
-        bool ExistByName(string Name);
+        bool ExistById(int Id);
         bool ExistByUnicityCriteriaAndNotSameId(int Id,Product product);
     }
 }

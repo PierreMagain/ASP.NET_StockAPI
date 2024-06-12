@@ -196,15 +196,15 @@ namespace Stock.DAL.Repositories
             return count > 0;
         }
 
-        public bool ExistByName(string Name)
+        public bool ExistById(int id)
         {
           using SqlCommand cmd = _conn.CreateCommand();
 
             cmd.CommandText = $@"SELECT COUNT(*)
                                  FROM Product
-                                 WHERE Name = @name";
+                                 WHERE Id = @id";
             
-            cmd.Parameters.AddWithValue("@nae",Name);
+            cmd.Parameters.AddWithValue("@id",id);
 
             _conn.Open();
 

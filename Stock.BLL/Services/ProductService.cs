@@ -48,7 +48,7 @@ namespace Stock.BLL.Services
         {
             if (!_productRepository.ExistById(id))
             {
-                throw new KeyNotFoundException($"Product with {id} doesn't exist");
+                throw new KeyNotFoundException($"Product {id} doesn't exist");
             }
             if (_productRepository.ExistByUnicityCriteriaAndNotSameId(id,p))
             {
