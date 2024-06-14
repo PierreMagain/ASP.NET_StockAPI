@@ -21,7 +21,7 @@ namespace Stock.BLL.Services
         {
             return _productRepository.GetAll();
         }
-        public Product? GetById(int id)
+        public Product GetById(int id)
         {
             Product? product = _productRepository.GetFullById(id);
             if(product==null)
